@@ -72,9 +72,14 @@ pipeline {
 
 def build(String repoUrl){
     echo "Starting to clone this repo: ${repoUrl}"
-    bat "git clone ${repoUrl} C:\\Users\\kkoki\\Desktop\\jenkins-project"
-    bat "dir C:\\Users\\kkoki\\Desktop\\jenkins-project"
+    dir("C:\\Users\\kkoki\\Desktop") {
+        git branch: 'main', poll: false, url: "${repoUrl}"
+    }
+    bat "dir C:\\Users\\kkoki\\Desktop\\python-greetings"
+    
     echo "Installing dependencies for python repo project"
-    bat "pip install -r C:\\Users\\kkoki\\Desktop\\jenkins-project\\requirements.txt"
+    dir("C:\\Users\\kkoki\\Desktop") {
+        bat "pip install -r requirements.txt"
+    }
 }
 
