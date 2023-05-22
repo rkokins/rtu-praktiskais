@@ -75,7 +75,6 @@ def build(String repoUrl){
     bat "git clone ${repoUrl} C:\\Users\\kkoki\\Desktop\\jenkins-project"
     bat "dir C:\\Users\\kkoki\\Desktop\\jenkins-project"
     echo "Installing dependencies for python repo project"
-    bat "cd C:\\Users\\kkoki\\Desktop\\jenkins-project"
-    bat "pip install -r requirements.txt"
+    bat "pip install -r C:\\Users\\kkoki\\Desktop\\jenkins-project\\requirements.txt"
 }
 
