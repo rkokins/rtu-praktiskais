@@ -7,7 +7,7 @@ pipeline {
         stage('install-pip-deps') {
             steps {
                 script{
-                    build()
+                    build('https://github.com/rkokins/rtu-praktiskais.git')
                 }
             }
         }
@@ -71,18 +71,11 @@ pipeline {
 }
 
 def build(String repoUrl){
-    gitClone('https://github.com/mtararujs/python-greetings')
-    pipInstall()
-}
-
-def gitClone() {
     echo "Starting to clone this repo: ${repoUrl}"
     bat "cd C:\\Users\\kkoki\\Desktop"
     git branch: 'main', poll: false, url: "${repoUrl}"
     bat "dir C:\\Users\\kkoki\\Desktop\\python-greetings"
-}
-
-def pipInstall() {
     echo "Installing dependencies for python repo project"
     bat "pip install -r requirements.txt"
 }
+
