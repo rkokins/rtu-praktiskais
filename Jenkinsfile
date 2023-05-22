@@ -7,7 +7,7 @@ pipeline {
         stage('install-pip-deps') {
             steps {
                 script{
-                    build('https://github.com/rkokins/rtu-praktiskais.git')
+                    build('https://github.com/mtararujs/python-greetings.git')
                 }
             }
         }
