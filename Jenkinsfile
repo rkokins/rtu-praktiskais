@@ -71,9 +71,6 @@ pipeline {
 }
 
 def build(String repoUrl){
-    echo "Will start to install all the necesary dependencies"
-    bat "npm install"
-    echo "Dependencies installed :D"
     gitClone('https://github.com/mtararujs/python-greetings')
     pipInstall()
 }
