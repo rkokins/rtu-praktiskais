@@ -69,12 +69,10 @@ pipeline {
 }
 
 def build(){
-    dir("C:\\Users\\kkoki\\Desktop\\python-greetings") {
-        echo "Starting to clone python-greetings repo"
-        git branch: 'main', changelog: false, poll: false, url: 'https://github.com/mtararujs/python-greetings.git'
-        bat "dir C:\\Users\\kkoki\\Desktop\\python-greetings"
-        echo "Installing dependencies for python repo project"
-        bat "pip install -r requirements.txt"
-    }    
+    echo "Starting to clone python-greetings repo"
+    git branch: 'main', changelog: false, poll: false, url: 'https://github.com/mtararujs/python-greetings.git'
+    bat "dir C:\\Users\\kkoki\\Desktop\\python-greetings"
+    echo "Installing dependencies for python repo project"
+    bat "pip install -r requirements.txt"   
 }
 
