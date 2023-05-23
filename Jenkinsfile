@@ -89,7 +89,7 @@ def deploy(String env, int port) {
 def test(String env) {
     echo "Testing ${env}"
     echo "Pulling in changes from main branch"
-    git branch: 'main', changelog: false, poll: false, url: 'https://github.com/mtararujs/python-greetings.git'
+    git branch: 'main', changelog: false, poll: false, url: 'https://github.com/mtararujs/course-js-api-framework.git'
     echo "Installing dependancies"
     bat "npm install"
     bat "npm run greetings greetings_${env}"
