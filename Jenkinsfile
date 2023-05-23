@@ -19,7 +19,7 @@ pipeline {
         stage('tests-on-dev') {
             steps {
                 script {
-                    echo "testing dev"
+                    test('dev')
                 }
             }
         }
@@ -33,7 +33,7 @@ pipeline {
         stage('tests-on-staging') {
             steps {
                 script {
-                    echo "testing staging"
+                    test('staging')
                 }
             }
         }
@@ -47,7 +47,7 @@ pipeline {
         stage('tests-on-preprod') {
             steps {
                 script {
-                    echo "testing preprod"
+                    test('preprod')
                 }
             }
         }
@@ -61,15 +61,14 @@ pipeline {
         stage('tests-on-prod') {
             steps {
                 script {
-                    echo "testing prod"
+                    test('prod')
                 }
             }
         }
     }
 }
 
-def build(){
-    bat " npm install pm2 -g"
+def build() {
     echo "Starting to clone python-greetings repo"
     git branch: 'main', changelog: false, poll: false, url: 'https://github.com/mtararujs/python-greetings.git'
     bat "dir"
@@ -85,4 +84,13 @@ def deploy(String env, int port) {
     bat "C:\\Users\\kkoki\\AppData\\Roaming\\npm\\pm2 delete greeting-app-${env} & EXIT /B 0"
     echo "starting the app"
     bat "C:\\Users\\kkoki\\AppData\\Roaming\\npm\\pm2 start app.py --name greeting-app-${env} -- --port ${port}"
+}
+
+def test(String env) {
+    echo "Testing ${env}"
+    echo "Pulling in changes from main branch"
+    git branch: 'main', changelog: false, poll: false, url: 'https://github.com/mtararujs/python-greetings.git'
+    echo "Installing dependancies"
+    bat "npm install"
+    bat "npm run greetings greetings_${env}"
 }
