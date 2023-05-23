@@ -81,8 +81,7 @@ def deploy(String env, int port) {
     echo "Pulling in changes from main branch"
     git branch: 'main', changelog: false, poll: false, url: 'https://github.com/mtararujs/python-greetings.git'
     echo "deleting the app"
-    bat "pm2 delete greeting-app-${env} & EXIT /B 0)"
+    bat "pm2 delete greeting-app-${env} & EXIT /B 0"
     echo "starting the app"
-    bat "pm2 start app.py --name greeting-app-${env} --port ${port}"
+    bat "pm2 start app.py --name greeting-app-${env} -- --port ${port}"
 }
-
