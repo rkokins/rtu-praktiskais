@@ -12,7 +12,7 @@ pipeline {
         stage('deploy-to-dev') {
             steps {
                 script {
-                    echo "deploying to dev"
+                    deploy('dev', 7001)
                 }
             }
         }
@@ -26,7 +26,7 @@ pipeline {
         stage('deploy-to-staging') {
             steps {
                script {
-                    echo "deploying to staging"
+                    deploy('staging', 7002)
                 }
             }
         }
@@ -40,7 +40,7 @@ pipeline {
         stage('deploy-to-preprod') {
             steps {
                 script {
-                    echo "deploying to preprod"
+                    deploy('preprod', 7003)
                 }
             }
         }
@@ -54,7 +54,7 @@ pipeline {
         stage('deploy-to-prod') {
             steps {
                 script {
-                    echo "deploying to prod"
+                    deploy('prod', 7004)
                 }
             }
         }
@@ -74,5 +74,15 @@ def build(){
     bat "dir"
     echo "Installing dependencies for python repo project"
     bat "pip install -r requirements.txt"   
+}
+
+def deploy(String env, int port) {
+    echo "Starting deployment to ${env}"
+    echo "Pulling in changes from main branch"
+    git branch: 'main', changelog: false, poll: false, url: 'https://github.com/mtararujs/python-greetings.git'
+    echo "deleting the app"
+    bat "pm2 delete greeting-app-${env} & EXIT /B 0)"
+    echo "starting the app"
+    bat "pm2 start app.py --name greeting-app-${env} --port ${port}"
 }
 
