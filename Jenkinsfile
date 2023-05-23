@@ -1,13 +1,11 @@
 pipeline {
     agent any
-    triggers{ pollSCM('*/1 * * * *') }
-    
 
     stages {
         stage('install-pip-deps') {
             steps {
                 script{
-                    build('https://github.com/mtararujs/python-greetings.git')
+                    build()
                 }
             }
         }
@@ -70,16 +68,13 @@ pipeline {
     }
 }
 
-def build(String repoUrl){
-    echo "Starting to clone this repo: ${repoUrl}"
+def build(){
     dir("C:\\Users\\kkoki\\Desktop\\python-greetings") {
-        git branch: 'main', poll: false, url: "${repoUrl}"
-    }
-    bat "dir C:\\Users\\kkoki\\Desktop\\python-greetings"
-    
-    echo "Installing dependencies for python repo project"
-    dir("C:\\Users\\kkoki\\Desktop\\python-greetings") {
+        echo "Starting to clone python-greetings repo"
+        git branch: 'main', changelog: false, poll: false, url: 'https://github.com/mtararujs/python-greetings.git'
+        bat "dir C:\\Users\\kkoki\\Desktop\\python-greetings"
+        echo "Installing dependencies for python repo project"
         bat "pip install -r requirements.txt"
-    }
+    }    
 }
 
