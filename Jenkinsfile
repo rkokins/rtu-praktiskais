@@ -69,6 +69,7 @@ pipeline {
 }
 
 def build(){
+    bat " npm install pm2 -g"
     echo "Starting to clone python-greetings repo"
     git branch: 'main', changelog: false, poll: false, url: 'https://github.com/mtararujs/python-greetings.git'
     bat "dir"
