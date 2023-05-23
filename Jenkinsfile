@@ -71,7 +71,7 @@ pipeline {
 def build(){
     echo "Starting to clone python-greetings repo"
     git branch: 'main', changelog: false, poll: false, url: 'https://github.com/mtararujs/python-greetings.git'
-    bat "dir ./python-greetings"
+    bat "dir python-greetings"
     echo "Installing dependencies for python repo project"
     bat "pip install -r requirements.txt"   
 }
