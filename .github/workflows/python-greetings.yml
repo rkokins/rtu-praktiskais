@@ -20,40 +20,48 @@ jobs:
     runs-on: self-hosted
     needs: [install-pip-deps]
     steps:
-      echo hey
+      run:
+        echo hey
   tests-on-dev:
     runs-on: self-hosted
     needs: [deploy-to-dev]
     steps:
-      echo hey
+      run:
+        echo hey
   deploy-to-staging:
     runs-on: self-hosted
     needs: [tests-on-dev]
     steps:
-      echo hey
+      run:
+        echo hey
   tests-on-staging:
     runs-on: self-hosted
     needs: [deploy-to-staging]
     steps:
-      echo hey
+      run:
+        echo hey
   deploy-to-preprod:
     runs-on: self-hosted
     needs: [tests-on-staging]
     steps:
-      echo hey
+      run:
+        echo hey
   tests-on-preprod:
     runs-on: self-hosted
     needs: [deploy-to-preprod]
     steps:
-      echo hey
+      run:
+        echo hey
   deploy-to-prod:
     runs-on: self-hosted
     needs: [tests-on-preprod]
     steps:
-      echo hey
+      run:
+        echo hey
   tests-on-prod:
     runs-on: self-hosted
     needs: [deploy-to-prod]
     steps:
-      echo hey
+      run:
+        echo hey
     
