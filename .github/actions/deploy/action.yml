@@ -1,0 +1,30 @@
+inputs:
+  port:
+  env:
+
+runs:
+  using: "composite"
+  steps:
+      - name: Start deployment
+        run: 
+          echo Deploying to ${{ inputs.env }}
+      - name: clone repository
+        uses: actions/checkout@v3.5.2
+        with:
+          clean: false
+      - name: clone python-greetings repository
+        uses: actions/checkout@v3.5.2
+        with:
+          repository: 'mtararujs/python-greetings'
+          path: 'python-greetings'
+          clean: false
+      - name: Delete app
+        working-directory: python-greetings
+        run:
+          pm2 delete greetings-app-${{ inputs.env }} & EXIT /B 0
+        shell: cmd
+      - name: Start app
+        working-directory: python-greetings
+        run:
+          pm2 start app.py --name greetings-app-${{ inputs.env }} -- --port ${{ inputs.port }}
+        shell: cmd
