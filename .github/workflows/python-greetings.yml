@@ -32,8 +32,9 @@ jobs:
     runs-on: self-hosted
     needs: [deploy-to-dev]
     steps:
-      - run:
-          echo hey
+      - uses: ./.github/actions/test
+        with:
+          env: dev
 
   deploy-to-staging:
     runs-on: self-hosted
@@ -48,8 +49,9 @@ jobs:
     runs-on: self-hosted
     needs: [deploy-to-staging]
     steps:
-      - run:
-          echo hey
+      - uses: ./.github/actions/test
+        with:
+          env: staging
 
   deploy-to-preprod:
     runs-on: self-hosted
@@ -64,8 +66,9 @@ jobs:
     runs-on: self-hosted
     needs: [deploy-to-preprod]
     steps:
-      - run:
-          echo hey
+      - uses: ./.github/actions/test
+        with:
+          env: preprod
 
   deploy-to-prod:
     runs-on: self-hosted
@@ -80,6 +83,7 @@ jobs:
     runs-on: self-hosted
     needs: [deploy-to-prod]
     steps:
-      - run:
-          echo heyy
+      - uses: ./.github/actions/test
+        with:
+          env: prod
     
