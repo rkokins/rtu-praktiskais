@@ -1,0 +1,9 @@
+runs:
+  using: "composite"
+  steps: 
+    - name: Dependencies instalation
+      working-directory: python-greetings
+      run:
+        echo Installing dependencies
+        pip install -r requirements.txt
+      shell: cmd
