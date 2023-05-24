@@ -1,6 +1,10 @@
 inputs:
   port:
+    description: 'Port on which app will run'
+    default: 7001
   env:
+    description: 'Environment of the app'
+    default: 'dev'
 
 runs:
   using: "composite"
@@ -8,6 +12,7 @@ runs:
       - name: Start deployment
         run: 
           echo Deploying to ${{ inputs.env }}
+        shell: cmd
       - name: clone repository
         uses: actions/checkout@v3.5.2
         with:
