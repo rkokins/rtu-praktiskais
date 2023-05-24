@@ -10,54 +10,64 @@ jobs:
     runs-on: self-hosted
     steps:
       - uses: actions/checkout@v3.5.2
+        with:
+          clean: false
       - uses: actions/checkout@v3.5.2
         with:
           repository: 'mtararujs/python-greetings'
           path: 'python-greetings'
           clean: false
       - uses: ./.github/actions/build
+
   deploy-to-dev:
     runs-on: self-hosted
     needs: [install-pip-deps]
     steps:
       run:
         echo hey
+
   tests-on-dev:
     runs-on: self-hosted
     needs: [deploy-to-dev]
     steps:
       run:
         echo hey
+
   deploy-to-staging:
     runs-on: self-hosted
     needs: [tests-on-dev]
     steps:
       run:
         echo hey
+
   tests-on-staging:
     runs-on: self-hosted
     needs: [deploy-to-staging]
     steps:
       run:
         echo hey
+
   deploy-to-preprod:
     runs-on: self-hosted
     needs: [tests-on-staging]
     steps:
       run:
         echo hey
+
   tests-on-preprod:
     runs-on: self-hosted
     needs: [deploy-to-preprod]
     steps:
       run:
         echo hey
+
   deploy-to-prod:
     runs-on: self-hosted
     needs: [tests-on-preprod]
     steps:
       run:
         echo hey
+        
   tests-on-prod:
     runs-on: self-hosted
     needs: [deploy-to-prod]
